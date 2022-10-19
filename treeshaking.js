@@ -19,8 +19,23 @@ body.forEach(function (node) {
     const code = jse.run(node);
     const id = jse.visitNode(node.id);
     decls.set(id, code);
+    // console.log("dd", decls);
+
     return;
   }
+  if (node.type === "VariableDeclaration") {
+    // let
+    const kind = node.kind;
+    for (const decl of node.declarations) {
+      // console.log("ddd", decl);
+      decls.set(
+        jse.visitNode(decl.id), // a
+        jse.visitVariableDeclarator(decl, kind) //
+      );
+    }
+    return;
+  }
+  console.log("str", decls);
 });
 
 // [

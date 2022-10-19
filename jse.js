@@ -18,7 +18,7 @@ class JSE {
     str += ") {" + "\n";
     str += this.visitNode(node.body);
     str += "}";
-    console.log("fun", str);
+    // console.log("fun", str);
 
     return str;
   }
@@ -48,6 +48,18 @@ class JSE {
     str += this.visitNode(node.right);
     return str + "\n";
   }
+  // 变量
+  visitVariableDeclarator(node, kind) {
+    let str = "";
+    str += kind ? kind + " " : str;
+    str += this.visitNode(node.id);
+    str += "=";
+    str += this.visitNode(node.init);
+    return str + ";" + "\n";
+  }
+  visitLiteral(node) {
+    return node.raw;
+  }
   visitNode(node) {
     // console.log(node);
     let str = "";
@@ -68,7 +80,11 @@ class JSE {
       case "BinaryExpression":
         str += this.visitBinaryExpression(node);
         break;
+      case "Literal": // 值
+        str += this.visitLiteral(node);
+        break;
     }
+
     return str;
   }
 }
