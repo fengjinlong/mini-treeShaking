@@ -1,0 +1,15 @@
+lockfileVersion: 5.4
+
+specifiers:
+  acorn: ^8.8.0
+
+dependencies:
+  acorn: 8.8.0
+
+packages:
+
+  /acorn/8.8.0:
+    resolution: {integrity: sha512-QOxyigPVrpZ2GXT+PFyZTl6TtOFc5egxHIP9IlQ+RbupQuX4RkT/Bee4/kQuC02Xkzg84JcT7oLYtDIQxp+v7w==}
+    engines: {node: '>=0.4.0'}
+    hasBin: true
+    dev: false
