@@ -2,7 +2,7 @@ class JSE {
   constructor() {}
   run(body) {
     let str = "";
-    str += this.visitNode(body);
+    str += this.visitNodes(body);
     return str;
   }
   visitFunctionDeclaration(node) {
@@ -60,9 +60,20 @@ class JSE {
   visitLiteral(node) {
     return node.raw;
   }
+  visitExpressionStatement(node) {
+    return this.visitNode(node.expression);
+  }
+  visitNodes(nodes) {
+    let str = "";
+    for (const node of nodes) {
+      str += this.visitNode(node);
+    }
+    return str;
+  }
   visitNode(node) {
     // console.log(node);
     let str = "";
+    // console.log("type", node.type);
     switch (node.type) {
       case "FunctionDeclaration":
         str += this.visitFunctionDeclaration(node);
@@ -83,6 +94,8 @@ class JSE {
       case "Literal": // 值
         str += this.visitLiteral(node);
         break;
+      case "ExpressionStatement":
+        str += this.visitExpressionStatement(node);
     }
 
     return str;
